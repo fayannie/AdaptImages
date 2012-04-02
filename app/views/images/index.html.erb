@@ -1,0 +1,13 @@
+<h1>Listing Images</h1>
+<p id="notice"><%= notice %></p>
+<table>
+<% @images.each do |image| %>
+  <tr>
+    <td><%= image.title %></td>
+    <td><%= link_to 'Show', image %></td>
+    <td><%= link_to 'Destroy', image, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+<%= link_to 'Upload Image', new_image_path %>
+
