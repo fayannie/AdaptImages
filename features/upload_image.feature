@@ -12,4 +12,4 @@ Feature: Upload Image
 
   Scenario: Uploading an image
     When I attach the file "kid01.jpg"
-    Then I should see the "1-kid01-jpg" image
+    Then I should see the "kid01-jpg" image
