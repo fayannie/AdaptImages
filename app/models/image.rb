@@ -4,8 +4,7 @@ class Image < ActiveRecord::Base
 
    def image_file=(file)
      @temp_file = file
-     name = @temp_file.original_filename
-     self.title = name.gsub(/[.]/,'-')
+     self.title = file.original_filename.gsub(/[.]/,'-')
    end
 
    def save_to_disk
