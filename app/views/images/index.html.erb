@@ -4,7 +4,10 @@
 <% @images.each do |image| %>
   <tr>
     <td><%= image.title %></td>
-    <td><%= link_to 'Show', image %></td>
+    <td><%= image.created_at %></td>
+    <td><%= link_to 'Show(OriginalImage)', image %></td>
+    <td><%= link_to 'Resize', :action => "resize_form", :id => image %></td>
+    <td><%= link_to 'Show(ResizeImage)', :action => "resize_image", :id => image %></td>
     <td><%= link_to 'Destroy', image, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>

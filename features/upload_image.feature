@@ -4,12 +4,11 @@ Feature: Upload Image
   As an user
   I want to upload image
 
-  # Scenario: Upload Image
-  #   Given I am on image upload page
-  #   When I attach the "clown.jpg" image
-  #   And I press "Upload Image" button
-  #   Then I should see the uploaded image
-
   Scenario: Uploading an image
-    When I attach the file "kid01.jpg"
-    Then I should see the "kid01-jpg" image
+    When I attach the file "test.jpg"
+    Then I should see the "1" image
+
+  Scenario: Uploading multiple images
+    Given I attach the file "test.jpg"
+    When I attach the file "test1.jpg"
+    Then I should see the "2" image in the page

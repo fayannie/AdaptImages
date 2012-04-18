@@ -23,4 +23,20 @@ describe ImagesController do
       :id => "1"
     )
   end
+
+  it "should route GET /images/1/resize_form" do
+    { :get => "/images/1/resize_form" }.should route_to(
+      :controller => "images",
+      :action => "resize_form",
+      :id => "1"
+    )
+  end
+
+  it "should route GET /images/1/resize_image" do
+    { :get => "/images/1/resize_image" }.should route_to(
+      :controller => "images",
+      :action => "resize_image",
+      :id => "1"
+    )
+  end
 end

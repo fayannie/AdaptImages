@@ -5,7 +5,10 @@ When /^I attach the file "([^"]*)"$/ do |image|
 end
 
 Then /^I should see the "([^"]*)" image$/ do |image|
-  page.should have_xpath("//img[@src=\"/upload/#{image}\"]")
+  page.should have_xpath("//img[@src=\"/upload/1\"]")
 end
 
+Then /^I should see the "([^"]*)" image in the page$/ do |image|
+  page.should have_xpath("//img[@src=\"/upload/2\"]")
+end
 
