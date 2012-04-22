@@ -29,10 +29,10 @@ describe ImagesController do
      end
   end
 
-  describe "GET resize_form" do
+  describe "GET edit" do
      it "assigns the requested image as @image" do
      Image.should_receive(:find).with("1").and_return(@image)
-     get :resize_form, :id => 1
+     get :edit, :id => 1
      assigns[:image].should == @image
      end
   end
@@ -68,29 +68,38 @@ describe ImagesController do
 
   end
 
-  describe "PUT do_resize" do
+  describe "PUT update" do
 
     describe "with valid params" do
-     it "should resize the requested image with corresponding attributes" do
+     it "should update image with corresponding attributes" do
          Image.should_receive(:find).with("1").and_return(@image)
          @image.should_receive(:update_attributes).and_return(true)
-         @image.should_receive(:resize)
-         put :do_resize, :id => 1
+         put :update, :id => 1
          response.should be_redirect
          assigns[:image].should == @image
      end
     end
 
     describe "with invalid params" do
-     it "shouldn't resize the requested image" do
+     it "shouldn't update the requested image" do
          Image.should_receive(:find).with("1").and_return(@image)
          @image.should_receive(:update_attributes).and_return(false)
-         put :do_resize, :id => 1
-         response.should render_template('resize_form')
+         put :update, :id => 1
+         response.should render_template('edit')
      end
     end
 
   end
+
+  describe "POST do_resize" do
+     it "should resize a requested image" do
+         Image.should_receive(:find).with("1").and_return(@image)
+         @image.should_receive(:resize)
+         post :do_resize, :id => 1
+         response.should be_redirect
+         assigns[:image].should == @image
+     end
+    end
 
   describe "DELETE destroy" do
      it "destroys the requestied image" do

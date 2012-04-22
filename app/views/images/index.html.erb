@@ -1,14 +1,17 @@
 <h1>Listing Images</h1>
+<p>NOTICE: The image will be resized to 100*100, if you don't update resize width and height.</p>
 <p id="notice"><%= notice %></p>
 <table>
 <% @images.each do |image| %>
   <tr>
+    <td><%= image.id %></td>
     <td><%= image.title %></td>
-    <td><%= image.created_at %></td>
-    <td><%= link_to 'Show(OriginalImage)', image %></td>
-    <td><%= link_to 'Resize', :action => "resize_form", :id => image %></td>
-    <td><%= link_to 'Show(ResizeImage)', :action => "resize_image", :id => image %></td>
-    <td><%= link_to 'Destroy', image, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td>
+       <%= link_to 'Show', image %>
+       <%= link_to 'Destroy', image, :confirm => 'Are you sure?', :method => :delete %>
+       <%= link_to 'Update resize width and height', edit_image_path(image) %>
+       <%= button_to 'Resize', :action => "do_resize", :id => image %>
+    </td>
   </tr>
 <% end %>
 </table>

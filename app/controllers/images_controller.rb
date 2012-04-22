@@ -20,6 +20,10 @@ class ImagesController < ApplicationController
      format.html # show.html.erb
     end
   end
+  
+  def edit
+    @image = Image.find(params[:id])
+  end
  
   def create
     @image = Image.new(params[:image_file])
@@ -32,10 +36,14 @@ class ImagesController < ApplicationController
     end
   end
 
-  def resize_form
+  def update
     @image = Image.find(params[:id])
-    respond_to do |format|
-      format.html  # resize_form.html.erb
+      respond_to do |format|
+      if @image.update_attributes(params[:image])
+        format.html { redirect_to images_url, :notice => "Width and Height of Image #{@image.id} #{@image.title} was successfully updated." }
+      else
+        format.html { render :action => "edit" }
+      end
     end
   end
 
@@ -48,15 +56,11 @@ class ImagesController < ApplicationController
 
   def do_resize
     @image = Image.find(params[:id])
+    @image.resize
     respond_to do |format|
-      if @image.update_attributes(params[:image])
-        @image.resize
-        format.html  { redirect_to :action => 'resize_image', :id => @image.id, :notice => "#{@image.width}*#{@image.height}" }
-      else
-        format.html { render :action => "resize_form" }
-      end
+      format.html  { redirect_to :action => 'resize_image', :id => @image.id }
     end
-   end
+  end
 
   def destroy
     @image = Image.find(params[:id])

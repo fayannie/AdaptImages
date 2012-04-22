@@ -4,10 +4,14 @@ Feature: Resize Image
   As an user
   I want to resize image
 
-  Scenario: Resizing Image
+  Scenario: Resizing Image to Default Size
     Given I have uploaded the "test.jpg" image
-    And I go to the resize form page
-    When I fill in "width" with "150"
-    And I fill in "height" with "150
-    And I press "Resize"
+    When I press "Resize"
     Then I should see the resized image
+
+ Scenario: Resizeing Image with Updating Resize Width and Height
+    Given I have uploaded the "test.jpg" image
+    When I fill "width" with "150",fill "height" with "150"
+    And I press "Update" to update width and height
+    And I press "Resize" again
+    Then I should see another resized image

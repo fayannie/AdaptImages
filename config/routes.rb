@@ -1,9 +1,8 @@
 AdaptImages::Application.routes.draw do
   resources :images do 
     member do
-      get 'resize_form'
       get 'resize_image'
-      put 'resize' => "images#do_resize"
+      post 'resize' =>'images#do_resize'
     end
   end
   

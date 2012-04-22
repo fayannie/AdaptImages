@@ -4,23 +4,29 @@ Given /^I have uploaded the "([^"]*)" image$/ do |image|
   click_on('Upload Image')
 end
 
-Given /^I go to the resize form page$/ do
-  visit "/images/1/resize_form"
-end
-
-When /^I fill in "([^"]*)" with "([^"]*)"$/ do |field, value|
-  fill_in 'Width', :with => '150'
-end
-
-When /^I fill in "([^"]*)" with "(\d+)$/ do |field, value|
-  fill_in 'Height', :with => '150'
-end
-
 When /^I press "([^"]*)"$/ do |button|
-  click_on('Resize')
+  click_button('Resize')
 end
 
 Then /^I should see the resized image$/ do
-  page.should have_xpath("//img[@src=\"/upload/resize/1\"]")
+  page.should have_xpath("//img[@src=\"/upload/resize/1/*\"]")
+end
+
+When /^I fill "([^"]*)" with "([^"]*)",fill "([^"]*)" with "([^"]*)"$/ do |field, value, field, value|
+  visit "/images/1/edit"
+  fill_in 'Width', :with => '150'
+  fill_in 'Height', :with => '150'
+end
+
+When /^I press "([^"]*)" to update width and height$/ do |button|
+ click_on('Update')
+end
+
+When /^I press "([^"]*)" again$/ do |button|
+  click_button('Resize')
+end
+
+Then /^I should see another resized image$/ do
+  page.should have_xpath("//img[@src=\"/upload/resize/1/150*150\"]")
 end
 

@@ -1,14 +1,19 @@
 require 'rubygems'
 require 'RMagick'
+require 'fileutils'
 
 class Image < ActiveRecord::Base
    after_save :save_to_disk
-   validate :image_is_present
    after_destroy :delete_file
+   validate :image_is_present
+   validates :width, :height, :numericality => true
+   validates_numericality_of :width, :height, :only_integer => true
 
    def image_file=(file)
      @temp_file = file
      self.title = file.original_filename
+     self.width = 100
+     self.height = 100
    end
 
    def save_to_disk
@@ -27,24 +32,23 @@ class Image < ActiveRecord::Base
    end
    
    def resize  
-     if self.width
-       width = self.width
-     else
-       width = 100
-     end
-     if self.height
-       height = self.height
-     else
-       height = 100
-     end
+     width = self.width
+     height = self.height
      @id = self.id.to_s
      original_image = Magick::Image.read('public/upload/'<<@id).first
      resize_image = original_image.resize(width, height)
-     resize_image.write('public/upload/resize/'<<@id)
+     @resized_size = self.width.to_s + '*' + self.height.to_s
+      
+     if File.exist?("#{Rails.root}/public/upload/resize/#{self.id}")
+         resize_image.write('public/upload/resize/'<<"#@id/"<<@resized_size)
+      else
+         Dir.mkdir "#{Rails.root}/public/upload/resize/#{self.id}"
+         resize_image.write('public/upload/resize/'<<"#@id/"<<@resized_size)
+      end
    end
 
    def delete_file
      File.delete("#{Rails.root}/public/upload/#{self.id}")
-     File.delete("#{Rails.root}/public/upload/resize/#{self.id}")
+     FileUtils.rm_rf("#{Rails.root}/public/upload/resize/#{self.id}")
    end
 end
