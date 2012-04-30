@@ -5,7 +5,7 @@
   <%= image_tag("/upload/#{@image.id}") %>
 </p>
 <%= link_to 'Update resize width and height', edit_image_path %>
-<%= button_to 'Resize', :action => "do_resize" %>
+<%= button_to "Resize to #{@image.width}*#{@image.height}", :action => "do_resize" %>
 <p><%= link_to 'Back', images_path %></p>
 
 

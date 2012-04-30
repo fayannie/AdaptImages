@@ -1,6 +1,6 @@
 <p>
   <b>Resized Image:</b>
-  <%= image_tag("/upload/resize/#{@image.id}/#{@image.width}*#{@image.height}") %> 
+  <%= image_tag("/upload/resize/#{@image.resize_images.last.id}") %> 
 </p>
 
 <%= link_to 'Back', images_path %>

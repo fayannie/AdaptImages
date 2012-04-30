@@ -6,12 +6,11 @@ Feature: Resize Image
 
   Scenario: Resizing Image to Default Size
     Given I have uploaded the "test.jpg" image
-    When I press "Resize"
+    When I press "Resize to 100*100"
     Then I should see the resized image
-
- Scenario: Resizeing Image with Updating Resize Width and Height
+ 
+  Scenario: Resizeing Image with Updating Resize Width and Height
     Given I have uploaded the "test.jpg" image
-    When I fill "width" with "150",fill "height" with "150"
-    And I press "Update" to update width and height
-    And I press "Resize" again
+    When I update values of width and height 
+    And I press "Resize to 150*150" to resize image again
     Then I should see another resized image

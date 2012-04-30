@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120411160317) do
+ActiveRecord::Schema.define(:version => 20120425124601) do
 
   create_table "images", :force => true do |t|
     t.string   "title"
@@ -19,6 +19,13 @@ ActiveRecord::Schema.define(:version => 20120411160317) do
     t.string   "type"
     t.integer  "width"
     t.integer  "height"
+  end
+
+  create_table "resize_images", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "image_id"
+    t.string   "image_size"
   end
 
 end

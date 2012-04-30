@@ -94,6 +94,7 @@ describe ImagesController do
   describe "POST do_resize" do
      it "should resize a requested image" do
          Image.should_receive(:find).with("1").and_return(@image)
+         @image.should_receive(:resize_images)
          @image.should_receive(:resize)
          post :do_resize, :id => 1
          response.should be_redirect
