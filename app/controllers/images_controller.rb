@@ -56,7 +56,6 @@ class ImagesController < ApplicationController
 
   def do_resize
     @image = Image.find(params[:id])
-    @resize_image = @image.resize_images.create(params[:resize_image])
     @image.resize
     respond_to do |format|
        format.html  { redirect_to :action => 'resize_image', :id => @image.id }

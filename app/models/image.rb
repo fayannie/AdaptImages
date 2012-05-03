@@ -40,7 +40,9 @@ class Image < ActiveRecord::Base
      @id = self.id.to_s
      original_image = Magick::Image.read('public/upload/'<<@id).first
      resize_image = original_image.resize(width, height)
-     @resize_id = resize_images.last.id.to_s
+     @resize_image = resize_images.create
+     @resize_image.image_size = width.to_s + '*' + height.to_s
+     @resize_id = @resize_image.id.to_s
      resize_image.write('public/upload/resize/'<<@resize_id) 
    end
 
