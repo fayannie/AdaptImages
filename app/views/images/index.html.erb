@@ -8,9 +8,8 @@
     <td><%= image.title %></td>
     <td>
        <%= link_to 'Show', image %>
+       <%= link_to 'Update resize width and height', :action => 'resize_form', :id => image %>
        <%= link_to 'Destroy', image, :confirm => 'Are you sure?', :method => :delete %>
-       <%= link_to 'Update resize width and height', edit_image_path(image) %>
-       <%= button_to "Resize to #{image.width}*#{image.height}", :action => "do_resize", :id => image %>
     </td>
   </tr>
 <% end %>

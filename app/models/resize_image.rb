@@ -5,5 +5,4 @@ class ResizeImage < ActiveRecord::Base
   def delete_file
      File.delete("#{Rails.root}/public/upload/resize/#{self.id}")
   end
-
 end

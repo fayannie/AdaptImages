@@ -1,19 +1,14 @@
-<tr>
-    <th>NOTICE: The image will be resized to 100*100, if you don't input any value for it's width and height.</th>
-</tr>
+<h1>Update resize width and height</h1>
 
-<%= form_for @image, :url => {:action => "do_resize"} do |f| %>
-  <div class="field">
-    <%= f.label :width %><br />
-    <%= f.text_field :width %>
-  </div>
-  <div class="field">
-    <%= f.label :height %><br />
-    <%= f.text_field :height %>
-  </div>
-  <div class="actions">
-    <%= f.submit "Resize" %>
-  </div>
-<% end %>
+<%= form_tag ({:action => 'do_resize'},:multipart => true) %>
 
-<%= link_to 'Back', images_path %>
+  <%= label_tag(:width, "Width") %>
+  <%= text_field_tag(:width) %>
+
+  <%= label_tag(:height, "Height") %>
+  <%= text_field_tag(:height) %>
+
+  <%= submit_tag "Resize" %>
+
+
+<p><%= link_to 'Back', images_path %></p>

@@ -3,8 +3,10 @@ require 'RMagick'
 
 class Image < ActiveRecord::Base
 
-   has_many :resize_images, :dependent => :destroy
-   
+   has_many :resize_images, 
+            #:class_name => "Image", 
+            :dependent => :destroy  
+
    after_save :save_to_disk
    after_destroy :delete_file
 
@@ -34,16 +36,13 @@ class Image < ActiveRecord::Base
       end
    end
    
-   def resize  
-     width = self.width
-     height = self.height
+   def resize(width, height)  
      @id = self.id.to_s
      original_image = Magick::Image.read('public/upload/'<<@id).first
-     resize_image = original_image.resize(width, height)
+     new_image = original_image.resize(width.to_i, height.to_i)
      @resize_image = resize_images.create
-     @resize_image.image_size = width.to_s + '*' + height.to_s
      @resize_id = @resize_image.id.to_s
-     resize_image.write('public/upload/resize/'<<@resize_id) 
+     new_image.write('public/upload/resize/'<<@resize_id) 
    end
 
    def delete_file
