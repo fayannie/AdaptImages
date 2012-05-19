@@ -29,6 +29,7 @@ GEM
       i18n (~> 0.6)
       multi_json (~> 1.0)
     arel (3.0.2)
+    blankslate (2.1.2.4)
     builder (3.0.0)
     capybara (1.1.2)
       mime-types (>= 1.16)
@@ -67,6 +68,9 @@ GEM
       json (>= 1.4.6)
     hike (1.2.1)
     i18n (0.6.0)
+    jbuilder (0.4.0)
+      activesupport (>= 3.0.0)
+      blankslate (>= 2.1.2.4)
     journey (1.0.3)
     jquery-rails (2.0.1)
       railties (>= 3.2.0, < 5.0)
@@ -160,6 +164,7 @@ DEPENDENCIES
   cucumber-rails
   database_cleaner
   dynamic_form
+  jbuilder
   jquery-rails
   json
   rails (= 3.2.2)

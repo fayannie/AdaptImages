@@ -4,6 +4,7 @@ class ImagesController < ApplicationController
     @images = Image.all
     respond_to do |format|
       format.html # index.html.erb
+      format.json { render :json => @images}
     end  
   end
 
@@ -11,6 +12,7 @@ class ImagesController < ApplicationController
     @image = Image.new
     respond_to do |format|
       format.html # new.html.erb
+      format.json { render :json => @image}
     end
   end
 
@@ -18,6 +20,7 @@ class ImagesController < ApplicationController
     @image = Image.find(params[:id])
     respond_to do |format|
      format.html # show.html.erb
+     format.json { render :json => @image}
     end
   end
  
@@ -26,8 +29,10 @@ class ImagesController < ApplicationController
     respond_to do |format|
      if @image.save
         format.html { redirect_to @image, :notice => 'Image was successfully uploaded.' }
+        format.json { render :json => @image}
      else
         format.html { render :action => "new", :notice => 'Image should be attached'}
+        format.json { render :json => @image}
      end
     end
   end
@@ -36,6 +41,7 @@ class ImagesController < ApplicationController
     @image = Image.find(params[:id])
     respond_to do |format|
       format.html  # resize_form.html.erb
+      format.json { render :json => @image}
     end
   end
 
@@ -44,6 +50,7 @@ class ImagesController < ApplicationController
     @image.resize(params[:width], params[:height])
     respond_to do |format|
        format.html  { redirect_to :action => 'resize_image', :id => @image.id }
+       format.json { render :json => @image}
     end
   end
 
@@ -51,6 +58,7 @@ class ImagesController < ApplicationController
     @image = Image.find(params[:id])
     respond_to do |format|
       format.html  # resize_image.html.erb
+      format.json { render :json => @image}
     end
   end  
 

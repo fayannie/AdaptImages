@@ -4,21 +4,29 @@ require 'RMagick'
 class Image < ActiveRecord::Base
 
    has_many :resize_images, 
-            #:class_name => "Image", 
+            :class_name => "Image", 
             :dependent => :destroy  
+
+   belongs_to :parent,
+	      :class_name => "Image",
+              :foreign_key => "image_id"
+
 
    after_save :save_to_disk
    after_destroy :delete_file
 
    validate :image_is_present
-   validates :width, :height, :numericality => true
-   validates_numericality_of :width, :height, :only_integer => true
 
    def image_file=(file)
      @temp_file = file
-     self.title = file.original_filename
-     self.width = 100
-     self.height = 100
+     if file.respond_to? :original_filename
+       self.title = file.original_filename
+     end
+   end
+
+   def parent=(parent) 
+     super 
+     self.title = parent.title + "_resized"
    end
 
    def save_to_disk
@@ -40,9 +48,9 @@ class Image < ActiveRecord::Base
      @id = self.id.to_s
      original_image = Magick::Image.read('public/upload/'<<@id).first
      new_image = original_image.resize(width.to_i, height.to_i)
-     @resize_image = resize_images.create
-     @resize_id = @resize_image.id.to_s
-     new_image.write('public/upload/resize/'<<@resize_id) 
+     StringIO.open(new_image.to_blob) do |io|
+       resize_images.create!(:image_file => io, :parent => self)
+     end
    end
 
    def delete_file
