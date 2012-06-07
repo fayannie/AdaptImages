@@ -15,6 +15,6 @@ When /^I press "([^"]*)"$/ do |button|
 end
 
 Then /^I should see the resized image$/ do
-  page.should have_xpath("//img[@src=\"/upload/3\"]")
+  page.should have_xpath("//img[@src=\"/upload/2\"]")
 end
 

@@ -4,7 +4,7 @@ class ImagesController < ApplicationController
     @images = Image.all
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render :json => @images}
+      format.json #{ render :json => @images}
     end  
   end
 
@@ -29,10 +29,10 @@ class ImagesController < ApplicationController
     respond_to do |format|
      if @image.save
         format.html { redirect_to @image, :notice => 'Image was successfully uploaded.' }
-        format.json { render :json => @image}
+        format.json { render :json => @image, :status => :created, :location => @image }
      else
         format.html { render :action => "new", :notice => 'Image should be attached'}
-        format.json { render :json => @image}
+        format.json { render :json => @image.errors, :status => :unprocessable_entity }
      end
     end
   end
