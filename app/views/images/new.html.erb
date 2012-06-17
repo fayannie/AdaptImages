@@ -1,6 +1,6 @@
 <h1>Image Upload</h1>
 
-<%= error_messages_for :image %>
+
 <%= form_tag ({:action => 'create'},:multipart => true) %>
 <p><label for="image_file">Select File</label>:
 <%= file_field 'image_file','image_file' %></p>

@@ -8,7 +8,6 @@ gem 'rails', '3.2.2'
 gem 'sqlite3'
 
 gem 'json'
-gem 'dynamic_form'
 gem 'rmagick'
 
 # Gems used only for assets and not required
@@ -36,6 +35,7 @@ group :test do
   gem 'rspec-rails'
   gem 'capybara'
   gem 'cucumber-rails'
+  gem 'json_spec'
   gem 'database_cleaner'
 end
 
