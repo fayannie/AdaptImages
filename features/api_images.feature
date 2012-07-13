@@ -56,7 +56,7 @@ Feature: Images API
         """
 
      Scenario: Creating an image
-       Given I attach the file "test1.jpg"
+       Given I upload "test1.jpg" through the API
        When I call "/images/2.json" in GET
        Then the JSON should be:
        """
@@ -71,7 +71,7 @@ Feature: Images API
        """
 
       Scenario: Creating an image should add it to the index
-        Given I attach the file "test1.jpg"
+        Given I upload "test1.jpg" through the API
         When I call "/images.json" in GET
         Then the JSON should be:
         """
